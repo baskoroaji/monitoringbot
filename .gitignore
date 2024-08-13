@@ -3,3 +3,4 @@ node_modules
 .env
 package-lock.json
 utils/api.js
+utils/userInfo.js
