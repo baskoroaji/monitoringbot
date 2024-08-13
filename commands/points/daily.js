@@ -44,7 +44,7 @@ module.exports = {
         });
                 
              const summary = dailyTotals.map(( {date, lastHonor} ) => (
-            `${date}\n Point: ${lastHonor.point}`
+            `${date}\n Point: ${lastHonor.point.toLocaleString()}`
         )).join('\n\n');
             console.log('Summary:', summary);
 

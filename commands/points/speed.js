@@ -20,7 +20,9 @@ module.exports = {
         try {
             await interaction.deferReply();
             const userData = await getUserPoints(teamraid, userid);
+            console.log("user data:",userData);
             const cutoff = await getUserPointsRank90k(teamraid, rank);
+            console.log("cutoff data:",cutoff);
 
                 if (userData && userData.length > 0 && cutoff && cutoff.length > 0) {
                     
@@ -31,16 +33,15 @@ module.exports = {
                     console.log(cutoffSpeed90k);
                     
                 const embed = new EmbedBuilder()
-                    .setTitle('User Information')
+                    .setTitle('User Information Speed Last 1 HOUR')
                     .setColor('#0099ff')
                     .setDescription(`Details for user ID: ${userid}`).setFooter({ text: "Disclaimer data for prelim,interlude, and final day 1 mostly innacurate" })
                     .addFields(
-                        { name: 'Your Speed', value: mySpeed.toString(), inline: true },
-                        { name: 'Cutoff Speed', value: cutoffSpeed90k.toString(), inline: true }
+                        { name: 'Your Speed/hour', value: mySpeed.toLocaleString(), inline: true },
+                        { name: `Cutoff Speed/hour rank: ${rank}`, value: cutoffSpeed90k.toLocaleString(), inline: true }
                     );
 
                 await interaction.editReply({ embeds: [embed] });
-                return { mySpeed, cutoffSpeed90k };
 
             } else {
                 await interaction.editReply(`No users found with user ID: ${userid}`);
